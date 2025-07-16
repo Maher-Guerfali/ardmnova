@@ -1,0 +1,194 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 220 15% 8%;
+    --foreground: 220 15% 95%;
+
+    --card: 220 15% 10%;
+    --card-foreground: 220 15% 95%;
+
+    --popover: 220 15% 10%;
+    --popover-foreground: 220 15% 95%;
+
+    --primary: 193 100% 50%;
+    --primary-foreground: 220 15% 8%;
+
+    --secondary: 220 15% 15%;
+    --secondary-foreground: 220 15% 95%;
+
+    --muted: 220 15% 15%;
+    --muted-foreground: 220 15% 65%;
+
+    --accent: 280 100% 70%;
+    --accent-foreground: 220 15% 8%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 15% 20%;
+    --input: 220 15% 15%;
+    --ring: 193 100% 50%;
+
+    /* AR Theme Colors */
+    --ar-primary: 193 100% 50%;
+    --ar-secondary: 280 100% 70%;
+    --ar-success: 120 100% 50%;
+    --ar-warning: 45 100% 60%;
+    
+    /* Gradients */
+    --gradient-ar: linear-gradient(135deg, hsl(var(--ar-primary)), hsl(var(--ar-secondary)));
+    --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    
+    /* Shadows */
+    --shadow-ar: 0 0 30px hsl(var(--ar-primary) / 0.3);
+    --shadow-glass: 0 8px 32px rgba(0,0,0,0.3);
+    
+    /* Animation */
+    --transition-ar: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 220 15% 5%;
+    --foreground: 220 15% 95%;
+
+    --card: 220 15% 8%;
+    --card-foreground: 220 15% 95%;
+
+    --popover: 220 15% 8%;
+    --popover-foreground: 220 15% 95%;
+
+    --primary: 193 100% 60%;
+    --primary-foreground: 220 15% 5%;
+
+    --secondary: 220 15% 12%;
+    --secondary-foreground: 220 15% 95%;
+
+    --muted: 220 15% 12%;
+    --muted-foreground: 220 15% 60%;
+
+    --accent: 280 100% 75%;
+    --accent-foreground: 220 15% 5%;
+
+    --destructive: 0 62.8% 50.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 15% 18%;
+    --input: 220 15% 12%;
+    --ring: 193 100% 60%;
+    --sidebar-background: 220 15% 8%;
+    --sidebar-foreground: 220 15% 95%;
+    --sidebar-primary: 193 100% 60%;
+    --sidebar-primary-foreground: 220 15% 5%;
+    --sidebar-accent: 220 15% 12%;
+    --sidebar-accent-foreground: 220 15% 95%;
+    --sidebar-border: 220 15% 18%;
+    --sidebar-ring: 193 100% 60%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    margin: 0;
+    overflow: hidden;
+    /* Force portrait mode on mobile */
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+  }
+  
+  /* Force portrait orientation */
+  @media screen and (orientation: landscape) and (max-width: 768px) {
+    body {
+      transform: rotate(90deg);
+      transform-origin: left top;
+      width: 100vh;
+      height: 100vw;
+      position: fixed;
+      top: 100%;
+      left: 0;
+    }
+  }
+}
+
+@layer components {
+  /* AR Glass Effect */
+  .ar-glass-panel {
+    @apply bg-gradient-glass border border-white/20 backdrop-blur-glass;
+  }
+  
+  /* AR Targeting Reticle */
+  .ar-reticle {
+    @apply border-2 border-ar-primary border-dashed rounded-lg animate-pulse-ar;
+  }
+  
+  /* Interactive Model Highlight */
+  .ar-model-highlight {
+    @apply ring-2 ring-ar-primary ring-opacity-50 animate-glow;
+  }
+  
+  /* Material Selector */
+  .material-circle {
+    @apply w-12 h-12 rounded-full border-2 border-white/20 cursor-pointer transition-all duration-300 hover:scale-110 hover:border-ar-primary;
+  }
+  
+  .material-circle.selected {
+    @apply border-ar-primary shadow-ar scale-110;
+  }
+  
+  /* Mobile-first scrollable horizontal */
+  .horizontal-scroll {
+    @apply flex gap-3 overflow-x-auto pb-2;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    /* Hide scrollbar */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  
+  .horizontal-scroll::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+  
+  /* Mobile UI adjustments */
+  @media (max-width: 768px) {
+    .mobile-ui {
+      @apply text-sm;
+    }
+    
+    .mobile-button {
+      @apply h-12 px-4 text-sm;
+    }
+    
+    .mobile-panel {
+      @apply p-3 rounded-lg;
+    }
+  }
+}

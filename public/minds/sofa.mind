@@ -1,0 +1,11 @@
+{
+  "name": "sofa",
+  "version": 1,
+  "imageTargets": [
+    {
+      "image": "sofa_target.jpg",
+      "width": 1.0,
+      "height": 1.0
+    }
+  ]
+}
